@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*- 
+
 from gtts import gTTS
 import sys
 from time import *
@@ -227,7 +229,7 @@ while True:
             sl = mode()
             sl.sleep_mode("sleep mode")
         elif truth == "nope":
-            tt18 = "No, I'm not sleep"
+            tt18 = "No, I'm not sleepy"
             language = "en"
             output = gTTS(text = tt18, lang = language, slow = False)
             output.save("nopesleep.mp3")
@@ -362,7 +364,8 @@ while True:
         pygame.mixer.quit()
         GPIO.output(13, True)
         GPIO.output(15, True)
-        shall = raw_input("Shall we turn on music? [ yes | no ] : ")
+        print("Shall we turn on music? [ yes | no ]")
+        shall = raw_input(" : ")
 
         guitar_musics = ["Sweden", "Time", "Deathbed", "No time to die", "A thousand years"]
 
@@ -487,14 +490,44 @@ while True:
             print("Will I joke for you? [ yes | no ]")
             joke = raw_input(" : ")
             if joke == "yes":
-            	pass
+                jokes = ["Why did you tell actors'break a leg'", "The answer is because every play has a cast"]
+                for i in jokes:
+                    print("{}".format(i))
+                    tt18 = "{}".format(i)
+                    language = "en"
+                    output = gTTS(text = tt18, lang = language, slow = False)
+                    output.save("{}.mp3".format(i))
+                    pygame.mixer.init()
+                    pygame.mixer.music.load("{}.mp3".format(i))
+                    pygame.mixer.music.play()
+                    clock = pygame.time.Clock()
+
+                    while pygame.mixer.music.get_busy():
+                        clock.tick(30)
+                    pygame.mixer.quit()
+                    GPIO.output(13, True)
+                    GPIO.output(15, True)
+                    pygame.time.delay(1000)
+                    print("3")
+                    pygame.time.delay(1000)
+                    print("2")
+                    pygame.time.delay(1000)
+                    print("1")
+                # joke1 = "What's the best thing about Switzerland?"
+                # joke1_ans = "I don't know, but the falg is the big plus"
+                # joke2 = "Did you hear about the mathematician who’s afraid of negative numbers?"
+                # joke2_ans = "He’ll stop at nothing to avoid them."
+                # joke3 = "Why do we tell actors to “break a leg?”"
+                # joke3_ans = "Why do we tell actors to “break a leg?”"
+                # joke_list = [joke1, joke1_ans, joke2, joke2_ans, joke3, joke3_ans]
+
             elif joke == "no":
-                tt14 = "Will I joke for you?"
+                tt16 = "Ok..."
                 language = "en"
-                output = gTTS(text = tt14, lang = language, slow = False)
-                output.save("ok.mp3")
+                output = gTTS(text = tt16, lang = language, slow = False)
+                output.save("o.mp3")
                 pygame.mixer.init()
-                pygame.mixer.music.load("ok.mp3")
+                pygame.mixer.music.load("o.mp3")
                 pygame.mixer.music.play()
                 clock = pygame.time.Clock()
   
